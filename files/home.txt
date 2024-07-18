@@ -1,0 +1,4 @@
+.aliases
+.zsh_history
+.zshrc
+/.oh-my-zsh
