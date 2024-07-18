@@ -1,4 +1,5 @@
 #!/bin/bash
+
 ROOT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 FILES_DIR=$ROOT_DIR/files
 BACKUP_DIR=$ROOT_DIR/backup
@@ -15,49 +16,40 @@ sync() {
   esac
 }
 
-home() {
-  echo "Syncing home..."
-  echo ""
+sync_home() {
+  echo "Sync home..."
   FILES=$FILES_DIR/home.txt
   LOCAL_DIR=$BACKUP_DIR/home
   REMOTE_DIR=/home/$USER
   sync
-  echo ""
 }
 
-fail2ban() {
-  echo "Syncing fail2ban..."
-  echo ""
+sync_fail2ban() {
+  echo "Sync fail2ban..."
   FILES=$FILES_DIR/fail2ban.txt
   LOCAL_DIR=$BACKUP_DIR/fail2ban
   REMOTE_DIR=/etc/fail2ban
   sync
-  echo ""
 }
 
-htpasswd() {
-  echo "Syncing htpasswd..."
-  echo ""
+sync_htpasswd() {
+  echo "Sync htpasswd..."
   FILES=$FILES_DIR/htpasswd.txt
   LOCAL_DIR=$BACKUP_DIR/htpasswd
   REMOTE_DIR=/etc/htpasswd
   sync
-  echo ""
 }
 
-nginx() {
-  echo "Syncing nginx..."
-  echo ""
+sync_nginx() {
+  echo "Sync nginx..."
   FILES=$FILES_DIR/nginx.txt
   LOCAL_DIR=$BACKUP_DIR/nginx
   REMOTE_DIR=/etc/nginx
   sync
-  echo ""
 }
 
-servarr() {
-  echo "Syncing servarr..."
-  echo ""
+sync_servarr() {
+  echo "Sync servarr..."
   FILES=$FILES_DIR/servarr.txt
   LOCAL_DIR=$BACKUP_DIR/servarr
   REMOTE_DIR=/opt/servarr
@@ -66,22 +58,19 @@ servarr() {
     chown -R $USER:$USER $REMOTE_DIR
   fi
   sync
-  echo ""
 }
 
-all() {
-  home
-  fail2ban
-  htpasswd
-  nginx
-  servarr
+sync_all() {
+  sync_home
+  sync_fail2ban
+  sync_htpasswd
+  sync_nginx
+  sync_servarr
 }
 
-for tool in rsync; do
-  if ! command -v $tool &> /dev/null; then
-    sudo apt-get install -y $tool > /dev/null
-  fi
-done
+if ! command -v rsync &> /dev/null; then
+  sudo apt-get install -y rsync > /dev/null
+fi
 
 case $1 in
   pull) DIRECTION="PULL" ;;
@@ -89,10 +78,10 @@ case $1 in
 esac
 
 case $2 in
-  home) home ;;
-  fail2ban) fail2ban ;;
-  htpasswd) htpasswd ;;
-  nginx) nginx ;;
-  servarr) servarr ;;
-  all) all ;;
+  all) sync_all ;;
+  home) sync_home ;;
+  fail2ban) sync_fail2ban ;;
+  htpasswd) sync_htpasswd ;;
+  nginx) sync_nginx ;;
+  servarr) sync_servarr ;;
 esac
