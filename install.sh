@@ -1,7 +1,7 @@
 #!/bin/bash
 
-sudo apt update > /dev/null
-sudo apt install -y git > /dev/null
+sudo apt-get update > /dev/null
+sudo apt-get install -y git > /dev/null
 
 echo "Installing Ubuntu Server Sync..."
 mkdir -p $HOME/.local/{bin,share}
