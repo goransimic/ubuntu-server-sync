@@ -2,14 +2,22 @@
 
 Backup/restore application configurations
 
-## Backup
+## Install
 
 ```sh
-./sync.sh pull <application>
+curl -s https://raw.githubusercontent.com/goransimic/ubuntu-server-sync/master/install.sh | bash
 ```
 
-## Restore
+## Usage
+
+### Backup
 
 ```sh
-./sync.sh push <application>
+ubuntu-server-sync pull <application>
+```
+
+### Restore
+
+```sh
+ubuntu-server-sync push <application>
 ```
