@@ -5,11 +5,11 @@ Backup/restore application configurations
 ## Backup
 
 ```sh
-./sync.sh pull <app>
+./sync.sh pull <application>
 ```
 
 ## Restore
 
 ```sh
-./sync.sh push <app>
+./sync.sh push <application>
 ```
