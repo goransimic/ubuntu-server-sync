@@ -13,11 +13,11 @@ curl -s https://raw.githubusercontent.com/goransimic/ubuntu-server-sync/master/i
 ### Backup
 
 ```sh
-ubuntu-server-sync pull <application>
+ubuntu-server-sync pull all|home|fail2ban|htpasswd|nginx|servarr
 ```
 
 ### Restore
 
 ```sh
-ubuntu-server-sync push <application>
+ubuntu-server-sync push all|home|fail2ban|htpasswd|nginx|servarr
 ```
