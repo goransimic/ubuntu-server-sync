@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ROOT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+ROOT_DIR=$HOME/.local/share/ubuntu-server-sync
 FILES_DIR=$ROOT_DIR/files
 BACKUP_DIR=$ROOT_DIR/backup
 
@@ -73,15 +73,15 @@ if ! command -v rsync &> /dev/null; then
 fi
 
 case $1 in
-  pull) DIRECTION="PULL" ;;
-  push) DIRECTION="PUSH" ;;
+  "pull") DIRECTION="PULL" ;;
+  "push") DIRECTION="PUSH" ;;
 esac
 
 case $2 in
-  all) sync_all ;;
-  home) sync_home ;;
-  fail2ban) sync_fail2ban ;;
-  htpasswd) sync_htpasswd ;;
-  nginx) sync_nginx ;;
-  servarr) sync_servarr ;;
+  "all") sync_all ;;
+  "home") sync_home ;;
+  "fail2ban") sync_fail2ban ;;
+  "htpasswd") sync_htpasswd ;;
+  "nginx") sync_nginx ;;
+  "servarr") sync_servarr ;;
 esac
