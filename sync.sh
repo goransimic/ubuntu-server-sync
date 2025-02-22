@@ -8,10 +8,10 @@ sync() {
   case $DIRECTION in
     "PULL")
       mkdir -p $LOCAL_DIR
-      rsync -arzv --files-from=$FILES $REMOTE_DIR $LOCAL_DIR
+      rsync -aHAXxv --numeric-ids --info=progress2 --bwlimit=20000 --files-from=$FILES $REMOTE_DIR $LOCAL_DIR
       ;;
     "PUSH")
-      rsync -arzv --files-from=$FILES $LOCAL_DIR $REMOTE_DIR
+      rsync -aHAXxv --numeric-ids --info=progress2 --bwlimit=20000 --files-from=$FILES $LOCAL_DIR $REMOTE_DIR
       ;;
   esac
 }
